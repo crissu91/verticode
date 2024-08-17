@@ -4,4 +4,5 @@ export interface IProject {
     category: string;
     description: string;
     id?: string;
+    imageUrl: string;
 }
