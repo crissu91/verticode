@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 function ProjectAdder() {
     const navigate = useNavigate();
-
+    const [formIsValid, setFormIsValid] = useState(true);
     const [newProject, setNewProject] = useState<IProject>({
         projectName: "",
         description: "",
@@ -13,10 +13,25 @@ function ProjectAdder() {
         category: "",
         imageUrl: "",
       });
-      const formHasErrors =  Object.values(newProject).some((items: keyof IProject) => items.length ===0) 
+
+      const validateForm = () => {
+        if (
+          !newProject.projectName ||
+          !newProject.description ||
+          !newProject.startDate ||
+          !newProject.category ||
+          !newProject.imageUrl.match(/^https?:\/\/.*\.(jpg|jpeg|png|gif)$/i)
+        ) {
+          setFormIsValid(false);
+          return false;
+        }
+        setFormIsValid(true);
+        return true;
+      };
     
       const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
+          if (!validateForm()) return;
           const id = uuidv4()
     
         setNewProject((prevState) => ({
@@ -96,7 +111,7 @@ function ProjectAdder() {
                 <option value="construction">Construction</option>
             </select>
 
-            <label htmlFor="image_url">Start Date</label>
+            <label htmlFor="image_url">Image URL</label>
             <input
                 className="border border-green rounded-[4px] p-1 mb-3"
                 id="image_url"
@@ -110,12 +125,12 @@ function ProjectAdder() {
                 required
             ></input>
 
-            <p className="text-[10px] text-gray-600">Please fill in all the required fields.</p> 
+            { !formIsValid && (<p className="text-[10px] text-red-600">Please fill in all the required fields.</p>) } 
 
             <button
                 type="submit"
                 className="mt-5 py-2 px-4 border rounded-full border-green bg-light-green w-fit hover:text-white hover:bg-green transition-colors shadow-md disabled:opacity-50 disabled:hover:bg-light-green disabled:hover:text-black"
-                disabled={formHasErrors}
+                disabled={!formIsValid}
             >
                 Submit
             </button>
