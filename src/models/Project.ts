@@ -3,4 +3,5 @@ export interface IProject {
     startDate: Date;
     category: string;
     description: string;
+    id?: string;
 }
