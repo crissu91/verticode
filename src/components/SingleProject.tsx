@@ -6,8 +6,8 @@ function SingleProject() {
     const formattedDate = new Date(newProject.startDate).toLocaleString();
 
     return (
-    <div className='flex gap-10 mx-auto border border-green rounded-[12px] shadow-md py-10 px-8 mt-10'>
-        <img src={newProject.imageUrl} alt="Project image" className='object-cover '/>
+    <div className='grid md:grid-cols-2 gap-10 mx-2 md:mx-10 border border-green rounded-[12px] shadow-md py-10 px-4 md:px-8 mt-10 overflow-hidden'>
+        <img src={newProject.imageUrl} alt="Project image" className='object-cover'/>
             
         <div className='flex flex-col space-y-4 w-[23em]'>
             <h1 className='text-[24px] font-medium'>Project name: {newProject.projectName}</h1>
