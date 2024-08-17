@@ -11,6 +11,7 @@ function ProjectAdder() {
         description: "",
         startDate: new Date(),
         category: "",
+        imageUrl: "",
       });
       const formHasErrors =  Object.values(newProject).some((items: keyof IProject) => items.length ===0) 
     
@@ -94,6 +95,20 @@ function ProjectAdder() {
                 <option value="music">Music</option>
                 <option value="construction">Construction</option>
             </select>
+
+            <label htmlFor="image_url">Start Date</label>
+            <input
+                className="border border-green rounded-[4px] p-1 mb-3"
+                id="image_url"
+                type="text"
+                placeholder="Image URL"
+                onChange={(e) =>
+                    setNewProject((newProject) => {
+                    return { ...newProject, imageUrl: e.target.value };
+                    })
+                }
+                required
+            ></input>
 
             <p className="text-[10px] text-gray-600">Please fill in all the required fields.</p> 
 
