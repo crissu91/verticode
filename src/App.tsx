@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { IProject } from "./models/Project";
+import { Route, Routes } from 'react-router-dom';
+import ProjectAdder from './components/ProjectAdder';
+import SingleProject from './components/SingleProject';
 
 export default function App() {
   return (
